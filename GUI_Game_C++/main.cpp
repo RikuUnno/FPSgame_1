@@ -2,10 +2,50 @@
 
 using namespace std;
 
+// カメラ（本体）のクラス
 class Camera
 {
-	VECTOR pos = VGet(0.0f, 1.8f, -10.0f);
+private:
+	VECTOR m_camPos;
+	double m_angleY;
+	double m_angleX;
+	int m_mouseX, m_mouseY; // マウスのポイントを入れるXY
 
+public:
+	Camera()
+	{
+		m_camPos = VGet(0.0f, 1.8f, -10.0f);
+
+		m_angleY = 0.0;
+		m_angleX = 0.0;
+
+		m_mouseX = 0;
+		m_mouseY = 0; 
+	}
+
+	virtual ~Camera(){}
+
+	void Update(int centerX, int centerY)
+	{
+		InputMouse(); // マウスの現在の位置を出す
+
+
+	}
+
+	void InputKey()
+	{
+
+	}
+
+	void InputMouse()
+	{
+		GetMousePoint(&m_mouseX, &m_mouseY); // マウスの現在の位置を出す
+
+#ifdef _DEBUG
+		DrawFormatString(0, 0, GetColor(255, 255, 255), // デバック用
+			"マウスX %d\nマウスY %d", m_mouseX, m_mouseY); // マウスポインタの位置を文字列で快適に見れるようにした
+#endif _DEBUG
+	}
 };
 
 // WinMain関数
@@ -22,9 +62,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		return -1; // エラーが起きたら直ちに終了
 	}
 
-	int mouseX, mouseY; // マウスのポイントを入れるXY
+	Camera cam; // カメラ本体
 
+	const int centerX = WIN_SIZE_X / 2; // マウスの固定する場所
+	const int centerY = WIN_SIZE_Y / 2; // マウスの固定する場所
 
+	SetMousePoint(centerX, centerY); // マウスの初期値の固定
+	SetMouseDispFlag(FALSE); // マウスの非表示
 
 	// 描画先画面を裏画面にセット
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -35,12 +79,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		clsDx();
 		ClearDrawScreen();
 
-		GetMousePoint(&mouseX, &mouseY); // マウスの現在の位置を出す
-
-#ifdef _DEBUG
-		DrawFormatString(0, 0, GetColor(255, 255, 255), // デバック用
-			"マウスX %d\nマウスY %d", mouseX, mouseY); // マウスポインタの位置を文字列で快適に見れるようにした
-#endif _DEBUG
+		cam.Update();
 
 		ScreenFlip();
 	}
