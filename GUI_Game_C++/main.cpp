@@ -60,9 +60,9 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	SetGraphMode(WIN_SIZE_X, WIN_SIZE_Y, 32); // 画面サイズのセット
 
+	SetBackgroundColor(135, 206, 235);     // 空の色を設定
+
 	SetWindowText("ゲーム合宿FPS（仮）"); // ウィンドウの名前（現在は仮）
-
-
 
 	if (DxLib_Init() == -1) // DXライブラリの初期化
 	{
