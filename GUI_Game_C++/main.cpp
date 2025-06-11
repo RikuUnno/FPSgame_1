@@ -8,6 +8,18 @@
 
 using namespace std;
 
+// 初期化時などで一度呼ぶ
+void SetupDefaultLight() 
+{
+	SetUseLighting(TRUE);
+
+	VECTOR dir = VNorm(VGet(0.0f, -1.0f, -1.0f));
+	SetLightDirection(dir);
+
+	SetUseZBuffer3D(TRUE);         // Zバッファ有効化
+	SetWriteZBuffer3D(TRUE);       // Zバッファ書き込み
+	SetLightEnable(TRUE);		   // ライティング全体を有効化
+}
 
 // グラウンドの表示
 void DrawGround()
@@ -27,10 +39,10 @@ void DrawGround()
 			double startX = -size / 2 + x * cell;
 			double startZ = -size / 2 + z * cell;
 
-			VECTOR p1 = VGet(startX, 0.0f, startZ);       // 左奥
-			VECTOR p2 = VGet(startX + cell, 0.0f, startZ);       // 右奥
-			VECTOR p3 = VGet(startX + cell, 0.0f, startZ + cell);  // 右前
-			VECTOR p4 = VGet(startX, 0.0f, startZ + cell);  // 左前
+			VECTOR p1 = VGet((float)startX, 0.0f, (float)startZ);       // 左奥
+			VECTOR p2 = VGet((float)startX + (float)cell, 0.0f, (float)startZ);       // 右奥
+			VECTOR p3 = VGet((float)startX + (float)cell, 0.0f, (float)startZ + (float)cell);  // 右前
+			VECTOR p4 = VGet((float)startX, 0.0f, (float)startZ + (float)cell);  // 左前
 
 			int color = ((x + z) % 2 == 0) ? color1 : color2;
 
@@ -50,10 +62,14 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	SetWindowText("ゲーム合宿FPS（仮）"); // ウィンドウの名前（現在は仮）
 
+
+
 	if (DxLib_Init() == -1) // DXライブラリの初期化
 	{
 		return -1; // エラーが起きたら直ちに終了
 	}
+
+	SetupDefaultLight();
 
 	Camera cam; // カメラ本体
 

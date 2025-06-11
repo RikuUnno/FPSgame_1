@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(VECTOR pos, double height, double radius)
-    : CapsuleCollider(                            // Å© Ç±Ç±Çí«â¡
+    : CapsuleCollider(
         VAdd(pos, VGet(0.0f, height, 0.0f)),   // top
         pos,                                   // bottom
         radius),                               // radius

@@ -21,19 +21,3 @@ void CapsuleCollider::SetPosition(VECTOR basePos, double height) {
     m_posBottom = basePos;
     m_posTop = VAdd(basePos, VGet(0, (float)height, 0));
 }
-
-// “–‚½‚è”»’è (‹…—p)
-bool CapsuleCollider::CheckCollision(const VECTOR& spherePos, double sphereRadius) const {
-    VECTOR seg = VSub(m_posTop, m_posBottom);
-    VECTOR proj = VSub(spherePos, m_posBottom);
-
-    double segLenSq = VDot(seg, seg);
-    double t = static_cast<double>(VDot(proj, seg)) / segLenSq;
-    t = std::fmax(0.0, std::fmin(1.0, t));
-
-    VECTOR closest = VAdd(m_posBottom, VScale(seg, (float)t));
-    double distSq = VSquareSize(VSub(spherePos, closest));
-
-    double totalRadius = m_radius + sphereRadius;
-    return distSq <= (totalRadius * totalRadius);
-}

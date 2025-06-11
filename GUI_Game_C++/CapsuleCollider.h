@@ -14,7 +14,6 @@ public:
     virtual ~CapsuleCollider(); // デストラクタ
 
     void SetCapsule(VECTOR top, VECTOR bottom, double radius); // 形状変化の更新用関数
-    bool CheckCollision(const VECTOR& spherePos, double sphereRadius) const; // 当たり判定
 
     VECTOR GetTop() const { return m_posTop; }       // m_posTopのゲッター
     VECTOR GetBottom() const { return m_posBottom; } // m_posBottomのゲッター
