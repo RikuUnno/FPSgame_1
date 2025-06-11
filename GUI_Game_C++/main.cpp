@@ -1,52 +1,43 @@
 #include "GameInfo.h"
+#include "Camera.h"
+
+#include <cmath>
+#include <vector>
 
 using namespace std;
 
-// カメラ（本体）のクラス
-class Camera
+
+// グラウンドの表示
+void DrawGround()
 {
-private:
-	VECTOR m_camPos;
-	double m_angleY;
-	double m_angleX;
-	int m_mouseX, m_mouseY; // マウスのポイントを入れるXY
+	const int num = 10;         // マスの数（10×10）
+	const double size = 500.0;  // 全体のサイズ
+	const double cell = size / num; // 1マスronの大きさ（50.0）
 
-public:
-	Camera()
+	int color1 = GetColor(180, 180, 180); // 明るいグレー
+	int color2 = GetColor(120, 120, 120); // 暗いグレー
+
+	for (int z = 0; z < num; ++z)
 	{
-		m_camPos = VGet(0.0f, 1.8f, -10.0f);
+		for (int x = 0; x < num; ++x)
+		{
+			// 左下の座標を計算（中心を原点にする）
+			double startX = -size / 2 + x * cell;
+			double startZ = -size / 2 + z * cell;
 
-		m_angleY = 0.0;
-		m_angleX = 0.0;
+			VECTOR p1 = VGet(startX, 0.0f, startZ);       // 左奥
+			VECTOR p2 = VGet(startX + cell, 0.0f, startZ);       // 右奥
+			VECTOR p3 = VGet(startX + cell, 0.0f, startZ + cell);  // 右前
+			VECTOR p4 = VGet(startX, 0.0f, startZ + cell);  // 左前
 
-		m_mouseX = 0;
-		m_mouseY = 0; 
+			int color = ((x + z) % 2 == 0) ? color1 : color2;
+
+			DrawTriangle3D(p1, p2, p3, color, TRUE);
+			DrawTriangle3D(p1, p3, p4, color, TRUE);
+		}
 	}
 
-	virtual ~Camera(){}
-
-	void Update(int centerX, int centerY)
-	{
-		InputMouse(); // マウスの現在の位置を出す
-
-
-	}
-
-	void InputKey()
-	{
-
-	}
-
-	void InputMouse()
-	{
-		GetMousePoint(&m_mouseX, &m_mouseY); // マウスの現在の位置を出す
-
-#ifdef _DEBUG
-		DrawFormatString(0, 0, GetColor(255, 255, 255), // デバック用
-			"マウスX %d\nマウスY %d", m_mouseX, m_mouseY); // マウスポインタの位置を文字列で快適に見れるようにした
-#endif _DEBUG
-	}
-};
+}
 
 // WinMain関数
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -79,7 +70,18 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		clsDx();
 		ClearDrawScreen();
 
-		cam.Update();
+		DrawGround(); // グラウンドの描画
+
+#ifdef _DEBUG
+		DrawLine3D(VGet(0, 5, 0), VGet(100, 5, 0), GetColor(255, 0, 0));   // X軸
+		DrawLine3D(VGet(0, 5, 0), VGet(0, 105, 0), GetColor(0, 255, 0));   // Y軸
+		DrawLine3D(VGet(0, 5, 0), VGet(0, 5, 100), GetColor(0, 0, 255));   // Z軸
+#endif // _DEBUG
+
+		cam.Update(centerX, centerY);
+
+
+		
 
 		ScreenFlip();
 	}
