@@ -1,5 +1,7 @@
 #include "GameInfo.h"
 #include "Camera.h"
+#include "Enemy.h"
+#include "CapsuleCollider.h"
 
 #include <cmath>
 #include <vector>
@@ -55,6 +57,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	Camera cam; // カメラ本体
 
+	Enemy enemy(VGet(0.0, 0.0, 0.0), 10, 2);
+
 	const int centerX = WIN_SIZE_X / 2; // マウスの固定する場所
 	const int centerY = WIN_SIZE_Y / 2; // マウスの固定する場所
 
@@ -80,7 +84,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 		cam.Update(centerX, centerY);
 
-
+		enemy.Update();
 		
 
 		ScreenFlip();
