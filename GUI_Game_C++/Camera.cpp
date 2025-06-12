@@ -123,6 +123,6 @@ void Camera::InputFireKey()
 {
 	if (GetMouseInput() & MOUSE_INPUT_LEFT && m_bulletTimer >= m_INTERVAL)
 	{
-		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front);
+		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front, 1.0);
 	}
 }

@@ -1,17 +1,18 @@
 #pragma once
 #include "DxLib.h"
+#include "SphereCollider.h"
 
 class Bullet
+	: public SphereCollider
 {
 private:
-	VECTOR m_pos; // 現在の位置
 	VECTOR m_dir; // 進行方向（正規化）
 	double m_speed; // 移動速度
 	double m_life; // 寿命(フレーム数)
 
 public:
 	// コンストラクタ
-	Bullet(VECTOR pos, VECTOR dir, double speed = 1.0, double life = 300.0);
+	Bullet(VECTOR pos, VECTOR dir, double radius = 1.0, double speed = 1.0, double life = 300.0);
 
 	// デストラクタ
 	virtual ~Bullet();

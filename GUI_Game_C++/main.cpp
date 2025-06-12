@@ -9,7 +9,7 @@
 using namespace std;
 
 // 初期化時などで一度呼ぶ
-void SetupDefaultLight() 
+void SetupDefaultLight()
 {
 	SetUseLighting(TRUE);
 
@@ -60,8 +60,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	SetGraphMode(WIN_SIZE_X, WIN_SIZE_Y, 32); // 画面サイズのセット
 
-	SetBackgroundColor(135, 206, 235);     // 空の色を設定
-
 	SetWindowText("ゲーム合宿FPS（仮）"); // ウィンドウの名前（現在は仮）
 
 	if (DxLib_Init() == -1) // DXライブラリの初期化
@@ -73,7 +71,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	Camera cam; // カメラ本体
 
-	Enemy enemy(VGet(0.0, 0.0, 0.0), 10, 2);
+	Enemy enemy(VGet(0.0, 2.0, 0.0), 10.0, 2.0);
 
 	const int centerX = WIN_SIZE_X / 2; // マウスの固定する場所
 	const int centerY = WIN_SIZE_Y / 2; // マウスの固定する場所
