@@ -1,6 +1,7 @@
 #include "Camera.h"
 
-Camera::Camera()
+Camera::Camera(CollisionManager* manager)
+	: m_manager(manager)
 {
 	m_camPos = VGet(0.0, 10.0, -30.0); // カメラの初期化
 
@@ -57,10 +58,14 @@ void Camera::Update(int centerX, int centerY)
 
 	SetCameraNearFar(0.1f, 1000.0f); // 視錐台の調整
 	SetCameraPositionAndTarget_UpVecY(m_camPos, m_target); // カメラのセット
+
 }
 
+
 //　キーボードの入力処理
-void Camera::InputKey()
+//　キーボードの入力処理
+
+inline void Camera::InputKey()
 {
 	// 前後左右の方向ベクトル計算
 	m_forward = VGet((float)sin(m_angleY), 0, (float)cos(m_angleY));
@@ -95,11 +100,14 @@ void Camera::InputMouse()
 // 弾用のUpdate
 void Camera::BulletUpdate()
 {
-	m_bulletTimer++;
-	if (m_bulletTimer >= 21)
-	{
-		m_bulletTimer = 0;
-	}
+	m_bulletTimer--;
+
+#ifdef _DEBUG
+	DrawFormatString(0, 45, GetColor(255, 255, 255), // デバック用
+		"m_bulletTimer:%d", m_bulletTimer); // マウスポインタの位置を文字列で快適に見れるようにした
+#endif _DEBUG
+
+	if (m_bulletTimer < -100) m_bulletTimer = 0;
 
 	for (auto& bullet : m_bulletList)
 	{
@@ -121,8 +129,9 @@ void Camera::BulletUpdate()
 // 弾の発射
 void Camera::InputFireKey()
 {
-	if (GetMouseInput() & MOUSE_INPUT_LEFT && m_bulletTimer >= m_INTERVAL)
+	if (GetMouseInput() & MOUSE_INPUT_LEFT && m_bulletTimer <= 0)
 	{
-		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front, 1.0);
+		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front, 1.0, 2.0, 100.0, m_manager);
+		m_bulletTimer = m_INTERVAL;
 	}
 }

@@ -9,13 +9,19 @@ private:
 	VECTOR m_dir; // 進行方向（正規化）
 	double m_speed; // 移動速度
 	double m_life; // 寿命(フレーム数)
+	unsigned int m_color; // 色
+
+	CollisionManager* m_manager;
 
 public:
 	// コンストラクタ
-	Bullet(VECTOR pos, VECTOR dir, double radius = 1.0, double speed = 1.0, double life = 300.0);
+	Bullet(VECTOR pos, VECTOR dir, double radius, double speed, double life, CollisionManager* manager);
 
 	// デストラクタ
 	virtual ~Bullet();
+
+	// 色をランダムに設定する
+	void SetRandomColor();
 
 	// 更新
 	void Update();

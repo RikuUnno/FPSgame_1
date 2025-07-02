@@ -2,10 +2,11 @@
 #include "Camera.h"
 #include "Enemy.h"
 #include "CapsuleCollider.h"
+#include "SphereCollider.h"
+#include "CollisionManager.h"
 
 #include <cmath>
 #include <vector>
-
 using namespace std;
 
 // 初期化時などで一度呼ぶ
@@ -53,6 +54,17 @@ void DrawGround()
 
 }
 
+//// 当たり判定
+//void HitCheck(CollisionManager* cm, CapsuleCollider* cp, Camera* camera)
+//{
+//	const std::vector<Bullet>& bullets = camera->GetBulletList();
+//	for (const Bullet& bullet : bullets)
+//	{
+//		// const を外して SphereCollider* に変換
+//		cm->HitCheckSphereToCapsule(const_cast<Bullet*>(&bullet), cp);
+//	}
+//}
+
 // WinMain関数
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -60,7 +72,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	SetGraphMode(WIN_SIZE_X, WIN_SIZE_Y, 32); // 画面サイズのセット
 
-	SetWindowText("ゲーム合宿FPS（仮）"); // ウィンドウの名前（現在は仮）
+	SetWindowText("FPSゲーム"); // ウィンドウの名前（現在は仮）
 
 	if (DxLib_Init() == -1) // DXライブラリの初期化
 	{
@@ -69,9 +81,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	SetupDefaultLight();
 
-	Camera cam; // カメラ本体
+	CollisionManager cm; // 当たり判定関係
 
-	Enemy enemy(VGet(0.0, 2.0, 0.0), 10.0, 2.0);
+	Camera cam(&cm); // カメラ本体
+
+	Enemy enemy(VGet(0.0, 2.0, 0.0), 10.0, 2.0, &cm);
 
 	const int centerX = WIN_SIZE_X / 2; // マウスの固定する場所
 	const int centerY = WIN_SIZE_Y / 2; // マウスの固定する場所
@@ -96,10 +110,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		DrawLine3D(VGet(0, 5, 0), VGet(0, 5, 100), GetColor(0, 0, 255));   // Z軸
 #endif // _DEBUG
 
+		cm.HitCheck();
+
 		cam.Update(centerX, centerY);
 
 		enemy.Update();
-		
 
 		ScreenFlip();
 	}

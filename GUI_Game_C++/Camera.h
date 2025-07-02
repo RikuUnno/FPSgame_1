@@ -1,7 +1,8 @@
 #pragma once
+#include <vector>
 #include "DxLib.h"
 #include "Bullet.h"
-#include <vector>
+
 
 // カメラ（プレイヤー）クラス
 class Camera
@@ -23,11 +24,14 @@ private:
 private:
 	std::vector<Bullet> m_bulletList;
 	int m_bulletTimer; // 生成タイマー
-	const int m_INTERVAL = 20; // タイマーを使った生成のインターバル
+	const int m_INTERVAL = 30; // タイマーを使った生成のインターバル
+
+private:
+	CollisionManager* m_manager;
 
 public:
 	// コンストラクタ
-	Camera();
+	Camera(CollisionManager* manager);
 
 	// デストラクタ
 	virtual ~Camera();
@@ -35,7 +39,10 @@ public:
 	// アップデートメソッド（基本はこのメソッドを実行関数で実行する）引数は画面の中心地
 	void Update(int centerX, int centerY);
 
+	// BulletListのゲッター
+	std::vector<Bullet> GetBulletList() const { return m_bulletList; }
 private:
+	//　キーボードの入力処理
 	//　キーボードの入力処理
 	void InputKey();
 
