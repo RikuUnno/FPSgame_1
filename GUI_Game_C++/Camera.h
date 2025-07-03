@@ -24,7 +24,7 @@ private:
 private:
 	std::vector<Bullet> m_bulletList;
 	int m_bulletTimer; // 生成タイマー
-	const int m_INTERVAL = 30; // タイマーを使った生成のインターバル
+	const int m_INTERVAL = 20; // タイマーを使った生成のインターバル
 
 private:
 	CollisionManager* m_manager;

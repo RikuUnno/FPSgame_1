@@ -1,25 +1,32 @@
 #include "Collider.h"
 #include "CollisionManager.h"
+//
+//Collider::Collider(const BoxType& box, CollisionManager* manager)
+//	: type(ColliderType::Box), data(box), m_manager(manager)
+//{
+//	m_isHit = false;
+//	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
+//}
+//
+//Collider::Collider(const SphereType& sphere, CollisionManager* manager)
+//	: type(ColliderType::Sphere), data(sphere), m_manager(manager)
+//{
+//	m_isHit = false;
+//	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
+//}
+//
+//Collider::Collider(const CapsuleType& capsule, CollisionManager* manager)
+//	: type(ColliderType::Capsule), data(capsule), m_manager(manager)
+//{
+//	m_isHit = false;
+//	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
+//}
 
-Collider::Collider(const BoxType& box, CollisionManager* manager)
-	: type(ColliderType::Box), data(box), m_manager(manager)
+Collider::Collider(const std::variant<BoxType, SphereType, CapsuleType>& data, CollisionManager* manager)
+    : type((ColliderType)data.index()), data(data), m_manager(manager)
 {
-	m_isHit = false;
-	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
-}
-
-Collider::Collider(const SphereType& sphere, CollisionManager* manager)
-	: type(ColliderType::Sphere), data(sphere), m_manager(manager)
-{
-	m_isHit = false;
-	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
-}
-
-Collider::Collider(const CapsuleType& capsule, CollisionManager* manager)
-	: type(ColliderType::Capsule), data(capsule), m_manager(manager)
-{
-	m_isHit = false;
-	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
+    m_isHit = false;
+    aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
 }
 
 Collider::~Collider()
@@ -44,6 +51,8 @@ void Collider::AddCollider(CollisionManager* manager)
 	manager->GetColliderList().push_back(this);
 }
 
+#ifdef _DEBUG
+// デバック用のAABBを線で表示
 void Collider::DrawAABB() const
 {
     int color = GetColor(255, 255, 255);
@@ -67,3 +76,4 @@ void Collider::DrawAABB() const
     DrawLine3D(p[0], p[4], color); DrawLine3D(p[1], p[5], color);
     DrawLine3D(p[2], p[6], color); DrawLine3D(p[3], p[7], color);
 }
+#endif // _DEBUG

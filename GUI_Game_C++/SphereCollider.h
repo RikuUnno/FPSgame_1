@@ -11,7 +11,6 @@ protected:
 public:
 	VECTOR GetSpherePos() { return std::get<SphereType>(data).m_spherePos; } // m_spherePosのゲッター
 	double GetSphereRadius() { return std::get<SphereType>(data).m_radius; } // m_radiusのゲッター
-	bool GetIsHit() { return m_isHit; }			  // m_isHitのゲッター
 
 	void SetAABB() override;
 };

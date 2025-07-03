@@ -27,7 +27,13 @@ void Bullet::SetRandomColor()
 // 更新
 void Bullet::Update()
 {
-	std::get<SphereType>(data).m_spherePos = VAdd(std::get<SphereType>(data).m_spherePos, VScale(m_dir, (float)m_speed));
+	//SphereType* a = std::get_if<SphereType>(&data);
+	//SphereType a = std::get<SphereType>(data);
+	//SphereType& a = std::get<SphereType>(data);
+
+
+	std::get_if<SphereType>(&data)->m_spherePos = VAdd(std::get_if<SphereType>(&data)->m_spherePos, VScale(m_dir, (float)m_speed));
+	//std::get<SphereType>(data).m_spherePos = VAdd(std::get_if<SphereType>(&data)->m_spherePos, VScale(m_dir, (float)m_speed));
 	SetAABB(); // AABBの更新
 	m_life--;
 }
@@ -35,9 +41,11 @@ void Bullet::Update()
 // 描画
 void Bullet::DrawBullet() const
 {
-	DrawSphere3D(std::get<SphereType>(data).m_spherePos, (float)std::get<SphereType>(data).m_radius, 8, m_color, m_color, TRUE);
+	DrawSphere3D(std::get_if<SphereType>(&data)->m_spherePos, (float)std::get_if<SphereType>(&data)->m_radius, 8, m_color, m_color, TRUE);
 
-	DrawAABB();
+#ifdef _DEBUG
+	DrawAABB(); // AABBの表示（Debug）
+#endif // _DEBUG
 }
 
 // 生存判定

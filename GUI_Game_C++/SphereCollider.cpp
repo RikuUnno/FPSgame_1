@@ -16,7 +16,7 @@ SphereCollider::~SphereCollider()
 // AABBÇÃê›íË
 void SphereCollider::SetAABB()
 {
-	SphereType SphePos = std::get<SphereType>(data);
+	const SphereType& SphePos = std::get<SphereType>(data);
 
 	aabb.min = VGet(
 		SphePos.m_spherePos.x - (float)SphePos.m_radius,

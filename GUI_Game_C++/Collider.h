@@ -44,13 +44,16 @@ protected:
 
 public:
     // コンストラクタ
-    Collider(const BoxType& box, CollisionManager* manager);
+    //Collider(const BoxType& box, CollisionManager* manager);
 
-    Collider(const SphereType& sphere, CollisionManager* manager);
+    //Collider(const SphereType& sphere, CollisionManager* manager);
 
-    Collider(const CapsuleType& capsule, CollisionManager* manager);
+    //Collider(const CapsuleType& capsule, CollisionManager* manager);
 
-    ~Collider();
+    Collider(const std::variant<BoxType, SphereType, CapsuleType>& data, CollisionManager* manager);
+
+    // デストラクタ
+    virtual ~Collider();
 
     // m_isHitのセッター　true
     void SetIsHitTRUE();
@@ -59,8 +62,9 @@ public:
 
     virtual void SetAABB() = 0; // 各コライダーに実装内容を描く
 
-    AABB GetAABB() const { return aabb; } // AABBのゲッター]
+    AABB GetAABB() const { return aabb; } // AABBのゲッター
     ColliderType GetType() const { return type; } // 構造体のTypeを返す
+    bool GetIsHit() { return m_isHit; }			  // m_isHitのゲッター
 
     const BoxType* GetBox() const { return std::get_if<BoxType>(&data); } // BoxTypeのゲッター
     const SphereType* GetSphere() const { return std::get_if<SphereType>(&data); } // SphereTypeのゲッター

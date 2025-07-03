@@ -1,6 +1,7 @@
 #include "GameInfo.h"
 #include "Camera.h"
 #include "Enemy.h"
+#include "BoxCollider.h"
 #include "CapsuleCollider.h"
 #include "SphereCollider.h"
 #include "CollisionManager.h"
@@ -110,11 +111,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		DrawLine3D(VGet(0, 5, 0), VGet(0, 5, 100), GetColor(0, 0, 255));   // ZŽ²
 #endif // _DEBUG
 
-		cm.HitCheck();
-
 		cam.Update(centerX, centerY);
 
 		enemy.Update();
+
+		cm.HitCheck();
 
 		ScreenFlip();
 	}

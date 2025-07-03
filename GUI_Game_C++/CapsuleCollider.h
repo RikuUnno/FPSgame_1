@@ -16,7 +16,6 @@ public:
     VECTOR GetBottom() const { return std::get<CapsuleType>(data).m_posBottom; } // m_posBottomのゲッター
     double Getheight() const { return std::get<CapsuleType>(data).m_height; }    // m_heightのゲッター
     double GetRadius() const { return std::get<CapsuleType>(data).m_radius; }    // m_radiusのゲッター
-    bool GetIsHit() { return m_isHit; }			  // m_isHitのゲッター
 
     void SetAABB() override; // AABBの設定
 };

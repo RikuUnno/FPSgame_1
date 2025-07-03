@@ -1,14 +1,8 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
-
-#include "CollisionManager.h"
+﻿#include "CollisionManager.h"
 #include "CapsuleCollider.h"
 #include "SphereCollider.h"
 #include <cmath>
 #include <algorithm>
-
-#include <iostream>
-
-char debug[] = "Debug";
 
 CollisionManager::CollisionManager()
 {}
@@ -109,8 +103,6 @@ void CollisionManager::NarrowPhase()
             colB->SetIsHitTRUE();
         }
     }
-
-    DrawFormatString(0, 185, 0xFFFFFF, "%s", debug);
 
     // ペアのリストをクリア
     broadPhasePairs.clear();

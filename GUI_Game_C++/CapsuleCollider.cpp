@@ -15,7 +15,7 @@ CapsuleCollider::~CapsuleCollider()
 
 void CapsuleCollider::SetAABB()
 {
-    CapsuleType capPos = std::get<CapsuleType>(data);
+    const CapsuleType& capPos = std::get<CapsuleType>(data);
 
     aabb.min.x = fmin(capPos.m_posTop.x, capPos.m_posBottom.x) - (float)capPos.m_radius;
     aabb.min.y = fmin(capPos.m_posTop.y, capPos.m_posBottom.y) - (float)capPos.m_radius;

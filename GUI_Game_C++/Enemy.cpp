@@ -35,7 +35,9 @@ void Enemy::Update()
 
     SetAABB(); // AABBの更新 
 
-    DrawAABB();
+#ifdef _DEBUG
+    DrawAABB(); // AABBの表示（Debug）
+#endif // _DEBUG
 
     Draw();
 }
