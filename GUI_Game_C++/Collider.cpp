@@ -1,36 +1,24 @@
 #include "Collider.h"
 #include "CollisionManager.h"
-//
-//Collider::Collider(const BoxType& box, CollisionManager* manager)
-//	: type(ColliderType::Box), data(box), m_manager(manager)
-//{
-//	m_isHit = false;
-//	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
-//}
-//
-//Collider::Collider(const SphereType& sphere, CollisionManager* manager)
-//	: type(ColliderType::Sphere), data(sphere), m_manager(manager)
-//{
-//	m_isHit = false;
-//	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
-//}
-//
-//Collider::Collider(const CapsuleType& capsule, CollisionManager* manager)
-//	: type(ColliderType::Capsule), data(capsule), m_manager(manager)
-//{
-//	m_isHit = false;
-//	aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
-//}
 
 Collider::Collider(const std::variant<BoxType, SphereType, CapsuleType>& data, CollisionManager* manager)
     : type((ColliderType)data.index()), data(data), m_manager(manager)
 {
+#ifdef _DEBUG
+    printfDx("cns ");
+#endif // _DEBUG
+
     m_isHit = false;
     aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
+    AddCollider(manager);
 }
 
 Collider::~Collider()
 {
+#ifdef _DEBUG
+    printfDx("OUT ");
+#endif // _DEBUG
+
     m_manager->DeleteCollider(this);
 }
 
@@ -48,7 +36,11 @@ void Collider::SetIsHitFALSE()
 
 void Collider::AddCollider(CollisionManager* manager)
 {
-	manager->GetColliderList().push_back(this);
+#ifdef _DEBUG
+    printfDx("add ");
+#endif // _DEBUG
+
+    manager->GetColliderList().push_back(this);
 }
 
 #ifdef _DEBUG

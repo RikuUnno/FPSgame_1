@@ -28,6 +28,8 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StageManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxCollider.h" />
@@ -39,6 +41,8 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameInfo.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="StageManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

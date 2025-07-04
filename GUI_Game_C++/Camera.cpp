@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include <algorithm>
 
 Camera::Camera(CollisionManager* manager)
 	: m_manager(manager)
@@ -21,6 +22,8 @@ Camera::Camera(CollisionManager* manager)
 	m_dy = 0;
 
 	m_bulletTimer = 0;
+
+	m_bulletList.reserve(200); // emplace_backのコピーを防ぐため
 }
 
 // デストラクタ
@@ -114,11 +117,9 @@ void Camera::BulletUpdate()
 		bullet.Update(); // 弾の更新（前方への移動）
 	}
 
-	m_bulletList.erase(
-		remove_if(m_bulletList.begin(), m_bulletList.end(), // 先頭から末尾までのイテレータ
-			[](const Bullet& b) {return !b.IsAlive(); }), // 条件式（ラムダ式(コードの短縮化)）
-		m_bulletList.end()
-	);
+	std::erase_if(m_bulletList, [](const Bullet& b) {
+		return !b.IsAlive();
+		});
 
 	for (auto& bullet : m_bulletList)
 	{
@@ -131,7 +132,7 @@ void Camera::InputFireKey()
 {
 	if (GetMouseInput() & MOUSE_INPUT_LEFT && m_bulletTimer <= 0)
 	{
-		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front, 1.0, 2.0, 100.0, m_manager);
+		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front, 1, 2, 300.0, m_manager);
 		m_bulletTimer = m_INTERVAL;
 	}
 }

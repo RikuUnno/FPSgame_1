@@ -5,22 +5,31 @@
 #include "CapsuleCollider.h"
 #include "SphereCollider.h"
 #include "CollisionManager.h"
+#include "StageManager.h"
 
 #include <cmath>
 #include <vector>
 using namespace std;
 
-// 初期化時などで一度呼ぶ
+// 初期化時などで一度呼ぶ(ライティング関係)
 void SetupDefaultLight()
 {
-	SetUseLighting(TRUE);
 
-	VECTOR dir = VNorm(VGet(0.0f, -1.0f, -1.0f));
-	SetLightDirection(dir);
 
-	SetUseZBuffer3D(TRUE);         // Zバッファ有効化
-	SetWriteZBuffer3D(TRUE);       // Zバッファ書き込み
-	SetLightEnable(TRUE);		   // ライティング全体を有効化
+	// 方向ライトの有効化
+	VECTOR lightDir = VNorm(VGet(.0f, -20.0f, 15.0f));
+	SetLightDirection(lightDir);
+
+	// 環境光
+	SetLightAmbColor(GetColorF(0.7f, 0.7f, 0.7f, 1.0f));
+
+	// ディフューズカラー
+	SetLightDifColor(GetColorF(1.0f, 1.0f, 1.0f, 1.0f));
+
+	SetUseLighting(TRUE);			// ライティングの有効
+	SetUseZBuffer3D(TRUE);			// Zバッファ有効化
+	SetWriteZBuffer3D(TRUE);		// Zバッファ書き込み
+	SetLightEnable(TRUE);			 // ライティング全体を有効化
 }
 
 // グラウンドの表示
@@ -55,16 +64,26 @@ void DrawGround()
 
 }
 
-//// 当たり判定
-//void HitCheck(CollisionManager* cm, CapsuleCollider* cp, Camera* camera)
-//{
-//	const std::vector<Bullet>& bullets = camera->GetBulletList();
-//	for (const Bullet& bullet : bullets)
-//	{
-//		// const を外して SphereCollider* に変換
-//		cm->HitCheckSphereToCapsule(const_cast<Bullet*>(&bullet), cp);
-//	}
-//}
+// クロスヘアの表示
+void DrawCrossHair()
+{
+	const int offsetY = 5;
+	const int centerX = WIN_SIZE_X / 2;
+	const int centerY = WIN_SIZE_Y / 2 + offsetY;
+	const int crossSize = 10;
+	int crossColor = GetColor(255, 255, 255);
+
+	DrawLine(centerX - crossSize, centerY, centerX + crossSize, centerY, crossColor); // 横
+	DrawLine(centerX, centerY - crossSize, centerX, centerY + crossSize, crossColor); // 縦
+}
+
+// XYZのライン描画
+void DrawVectorLine()
+{
+	DrawLine3D(VGet(0, 5, 0), VGet(100, 5, 0), GetColor(255, 0, 0));   // X軸
+	DrawLine3D(VGet(0, 5, 0), VGet(0, 105, 0), GetColor(0, 255, 0));   // Y軸
+	DrawLine3D(VGet(0, 5, 0), VGet(0, 5, 100), GetColor(0, 0, 255));   // Z軸
+}
 
 // WinMain関数
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -80,13 +99,15 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		return -1; // エラーが起きたら直ちに終了
 	}
 
-	SetupDefaultLight();
+	SetupDefaultLight(); // ライティング設定
 
 	CollisionManager cm; // 当たり判定関係
 
 	Camera cam(&cm); // カメラ本体
 
-	Enemy enemy(VGet(0.0, 2.0, 0.0), 10.0, 2.0, &cm);
+	Enemy enemy(VGet(0.0, 6.0, 0.0), 10.0, 2.0, &cm); // 敵
+
+	StageManager sm; // ステージの生成
 
 	const int centerX = WIN_SIZE_X / 2; // マウスの固定する場所
 	const int centerY = WIN_SIZE_Y / 2; // マウスの固定する場所
@@ -97,6 +118,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 	// 描画先画面を裏画面にセット
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	sm.Init(&cm); // ステージの生成
+
 	// ESCを押したら画面が落ちる
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
@@ -106,16 +129,18 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		DrawGround(); // グラウンドの描画
 
 #ifdef _DEBUG
-		DrawLine3D(VGet(0, 5, 0), VGet(100, 5, 0), GetColor(255, 0, 0));   // X軸
-		DrawLine3D(VGet(0, 5, 0), VGet(0, 105, 0), GetColor(0, 255, 0));   // Y軸
-		DrawLine3D(VGet(0, 5, 0), VGet(0, 5, 100), GetColor(0, 0, 255));   // Z軸
+		DrawVectorLine(); // XYZのライン描画
 #endif // _DEBUG
 
-		cam.Update(centerX, centerY);
+		enemy.Update(); // 敵の更新
 
-		enemy.Update();
+		cam.Update(centerX, centerY); // カメラ(視点)の更新
 
-		cm.HitCheck();
+		DrawCrossHair(); // クロスヘアの描画（最前面）
+
+		sm.Update(); // ステージの更新
+
+		cm.HitCheck(); // 当たり判定
 
 		ScreenFlip();
 	}

@@ -25,66 +25,147 @@
     <Filter Include="ヘッダー ファイル\Collider">
       <UniqueIdentifier>{668d2a06-06f8-46cd-bc07-822961221b9d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Check">
-      <UniqueIdentifier>{53271ce0-d122-470d-812d-24a5b3aa1941}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Collider\Box">
+      <UniqueIdentifier>{c66050d9-3d01-4314-8f5a-b7a25b9c7152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collider\Sphere">
+      <UniqueIdentifier>{bfcb95cb-b649-4dd9-af3b-344475098be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collider\Capsule">
+      <UniqueIdentifier>{56774d2f-a4bd-4366-85fe-3b8f6638b812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collider\Manager">
+      <UniqueIdentifier>{a78e77bf-71cf-407b-9ac4-9cd5cfc6e8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collider\Collider">
+      <UniqueIdentifier>{a0fe542f-e6fa-44dc-9f69-76127efc525b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Collider\Capsule">
+      <UniqueIdentifier>{9d6bebb8-58e5-4c95-8c8e-d3e92daaa3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Collider\Sphere">
+      <UniqueIdentifier>{d708f561-1137-427d-8328-d60ca65e029f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Collider\Box">
+      <UniqueIdentifier>{99390d3c-0037-4e3d-8258-0ec4cb422507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Collider\Collider">
+      <UniqueIdentifier>{e0440f2b-b717-4cef-82ca-044a80ca7863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Collider\Manager">
+      <UniqueIdentifier>{adb062e5-4eb3-4d3c-8a29-d4b17ef1207c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player">
+      <UniqueIdentifier>{4689eb09-2a85-4ce4-9f2b-c86b633b6c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player\Camera">
+      <UniqueIdentifier>{49422116-4eff-4f3c-bca4-aa2550d0f545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player\Bullet">
+      <UniqueIdentifier>{2df17bda-7f29-4eff-a715-a286d9893bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Enemy">
+      <UniqueIdentifier>{4a1c57ea-a4c6-4944-b57c-0da70f869e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player">
+      <UniqueIdentifier>{6b951fc1-86c7-4072-a8df-62e52c4dcb2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player\Camera">
+      <UniqueIdentifier>{47fb74f5-b461-4ff2-9185-303e62cee06b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player\Bullet">
+      <UniqueIdentifier>{ac863794-0579-4aa1-8c00-bd43841642da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Enemy">
+      <UniqueIdentifier>{c8c8242d-178c-4df6-bc77-0e3a1860c63b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage">
+      <UniqueIdentifier>{f1e0d9fa-dafd-46d6-9ce3-74cbf8a6d850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage">
+      <UniqueIdentifier>{86ea7635-b13d-4e14-a392-841a408cb901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage\Manager">
+      <UniqueIdentifier>{3faa1750-1e68-4740-9e9d-44d3c0272c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage\Stage">
+      <UniqueIdentifier>{c23a1333-ed9d-4642-b1cc-62bff2ae2638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage\Stage">
+      <UniqueIdentifier>{d5279a02-aa4b-49e9-ac5f-e4f94397abf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage\Manager">
+      <UniqueIdentifier>{d67b6a13-8a52-41b2-9fc5-9b7cd762b80c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CapsuleCollider.h">
-      <Filter>ヘッダー ファイル\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>ヘッダー ファイル\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereCollider.h">
-      <Filter>ヘッダー ファイル\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="GameInfo.h">
       <Filter>ヘッダー ファイル\Info</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>ヘッダー ファイル\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>ヘッダー ファイル\Collider</Filter>
+      <Filter>ヘッダー ファイル\Collider\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="CapsuleCollider.h">
+      <Filter>ヘッダー ファイル\Collider\Capsule</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>ヘッダー ファイル\Collider\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>ヘッダー ファイル\Collider\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>ヘッダー ファイル\Collider\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ヘッダー ファイル\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ヘッダー ファイル\Player\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>ヘッダー ファイル\Stage\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>ヘッダー ファイル\Stage\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル\main</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>ソース ファイル\Collider\Box</Filter>
     </ClCompile>
     <ClCompile Include="CapsuleCollider.cpp">
-      <Filter>ソース ファイル\Collider</Filter>
+      <Filter>ソース ファイル\Collider\Capsule</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>ソース ファイル\Collider</Filter>
+      <Filter>ソース ファイル\Collider\Manager</Filter>
     </ClCompile>
     <ClCompile Include="SphereCollider.cpp">
-      <Filter>ソース ファイル\Collider</Filter>
+      <Filter>ソース ファイル\Collider\Sphere</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>ソース ファイル\Collider</Filter>
+      <Filter>ソース ファイル\Collider\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>ソース ファイル\Collider</Filter>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ソース ファイル\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>ソース ファイル\Player\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>ソース ファイル\Stage\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>ソース ファイル\Stage\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

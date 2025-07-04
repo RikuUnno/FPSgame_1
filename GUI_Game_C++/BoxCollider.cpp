@@ -4,8 +4,6 @@
 BoxCollider::BoxCollider(VECTOR min, VECTOR max, CollisionManager* manager)
 	: Collider(BoxType{ min, max }, manager)
 {
-	AddCollider(manager);
-
 	SetAABB();
 }
 

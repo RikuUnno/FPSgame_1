@@ -28,6 +28,8 @@ void CollisionManager::HitCheck()
 
 void CollisionManager::BroadPhase()
 {
+
+    DrawFormatString(0, 150, GetColor(255, 255, 255), "colliderSize = %d", colliders.size());
     for (size_t i = 0; i < colliders.size(); ++i) {
         for (size_t j = i + 1; j < colliders.size(); ++j) {
             AABB a = colliders[i]->GetAABB();

@@ -21,7 +21,6 @@ void Enemy::SetRandomColor()
     {
 
         EnemyColor = GetColor(GetRand(255), GetRand(255), GetRand(255));
-
         m_isHit = false; // ç≈å„Ç…ÇÕfalseÇ…ñﬂÇ∑
     }
 }

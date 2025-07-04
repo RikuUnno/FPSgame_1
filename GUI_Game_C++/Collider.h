@@ -44,12 +44,6 @@ protected:
 
 public:
     // コンストラクタ
-    //Collider(const BoxType& box, CollisionManager* manager);
-
-    //Collider(const SphereType& sphere, CollisionManager* manager);
-
-    //Collider(const CapsuleType& capsule, CollisionManager* manager);
-
     Collider(const std::variant<BoxType, SphereType, CapsuleType>& data, CollisionManager* manager);
 
     // デストラクタ

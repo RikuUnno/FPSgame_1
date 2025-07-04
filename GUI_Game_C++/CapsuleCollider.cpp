@@ -5,7 +5,6 @@
 CapsuleCollider::CapsuleCollider(VECTOR top, VECTOR bottom, double height, double radius, CollisionManager* manager)
     : Collider(CapsuleType{top, bottom, height, radius}, manager)
 {
-    AddCollider(manager);
     SetAABB();
 }
 

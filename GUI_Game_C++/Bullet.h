@@ -6,7 +6,7 @@ class Bullet
 	: public SphereCollider
 {
 private:
-	VECTOR m_dir; // 進行方向（正規化）
+	VECTOR m_dir; // 進行方向（正規化）S
 	double m_speed; // 移動速度
 	double m_life; // 寿命(フレーム数)
 	unsigned int m_color; // 色
@@ -16,6 +16,8 @@ private:
 public:
 	// コンストラクタ
 	Bullet(VECTOR pos, VECTOR dir, double radius, double speed, double life, CollisionManager* manager);
+
+	Bullet(const Bullet& ohter);
 
 	// デストラクタ
 	virtual ~Bullet();

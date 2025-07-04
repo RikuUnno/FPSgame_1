@@ -39,8 +39,6 @@ public:
 	// アップデートメソッド（基本はこのメソッドを実行関数で実行する）引数は画面の中心地
 	void Update(int centerX, int centerY);
 
-	// BulletListのゲッター
-	std::vector<Bullet> GetBulletList() const { return m_bulletList; }
 private:
 	//　キーボードの入力処理
 	//　キーボードの入力処理

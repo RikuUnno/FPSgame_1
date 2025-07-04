@@ -12,6 +12,21 @@ Bullet::Bullet(VECTOR pos, VECTOR dir, double radius, double speed, double life,
 	SetRandomColor();
 }
 
+Bullet::Bullet(const Bullet& other)
+	: SphereCollider(other.GetSphere()->m_spherePos, other.GetSphere()->m_radius, other.m_manager),
+	m_dir(other.m_dir),
+	m_speed(other.m_speed),
+	m_life(other.m_life),
+	m_color(other.m_color),
+	m_manager(other.m_manager)
+{
+#ifdef _DEBUG
+	printfDx("cpy");
+#endif // _DEBUG
+}
+
+
+
 // デストラクタ
 Bullet::~Bullet()
 {}
@@ -20,20 +35,13 @@ Bullet::~Bullet()
 void Bullet::SetRandomColor()
 {
 	m_color = GetColor(GetRand(255), GetRand(255), GetRand(255));
-
-	SetIsHitFALSE();
 }
 
 // 更新
 void Bullet::Update()
 {
-	//SphereType* a = std::get_if<SphereType>(&data);
-	//SphereType a = std::get<SphereType>(data);
-	//SphereType& a = std::get<SphereType>(data);
-
-
-	std::get_if<SphereType>(&data)->m_spherePos = VAdd(std::get_if<SphereType>(&data)->m_spherePos, VScale(m_dir, (float)m_speed));
-	//std::get<SphereType>(data).m_spherePos = VAdd(std::get_if<SphereType>(&data)->m_spherePos, VScale(m_dir, (float)m_speed));
+	SphereType* sphere = std::get_if<SphereType>(&data);
+	sphere->m_spherePos = VAdd(sphere->m_spherePos, VScale(m_dir, (float)m_speed));
 	SetAABB(); // AABBの更新
 	m_life--;
 }
@@ -41,7 +49,8 @@ void Bullet::Update()
 // 描画
 void Bullet::DrawBullet() const
 {
-	DrawSphere3D(std::get_if<SphereType>(&data)->m_spherePos, (float)std::get_if<SphereType>(&data)->m_radius, 8, m_color, m_color, TRUE);
+	const SphereType sphere = std::get<SphereType>(data);
+	DrawSphere3D(sphere.m_spherePos, (float)sphere.m_radius, 8, m_color, m_color, TRUE);
 
 #ifdef _DEBUG
 	DrawAABB(); // AABBの表示（Debug）

@@ -4,8 +4,6 @@
 SphereCollider::SphereCollider(VECTOR spherePos, double redius, CollisionManager* manager)
 	: Collider(SphereType{ spherePos, redius }, manager)
 {
-	AddCollider(manager);
-
 	SetAABB();
 };
 
