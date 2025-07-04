@@ -15,6 +15,7 @@ void Enemy::SetPosition()
     std::get<CapsuleType>(data).m_posTop = VAdd(std::get<CapsuleType>(data).m_posBottom, VGet(0, (float)std::get<CapsuleType>(data).m_height, 0));
 }
 
+// F‚Ì•ÏX
 void Enemy::SetRandomColor()
 {
         EnemyColor = GetColor(GetRand(255), GetRand(255), GetRand(255));
@@ -45,6 +46,5 @@ void Enemy::Draw()
 
 void Enemy::OnCollisionEnter(Collider* other) 
 {
-    printfDx("Enemy:BulletHIt = Enter");
     SetRandomColor();
 }

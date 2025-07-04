@@ -14,8 +14,6 @@ using namespace std;
 // 初期化時などで一度呼ぶ(ライティング関係)
 void SetupDefaultLight()
 {
-
-
 	// 方向ライトの有効化
 	VECTOR lightDir = VNorm(VGet(.0f, -20.0f, 15.0f));
 	SetLightDirection(lightDir);
@@ -67,9 +65,8 @@ void DrawGround()
 // クロスヘアの表示
 void DrawCrossHair()
 {
-	const int offsetY = 5;
 	const int centerX = WIN_SIZE_X / 2;
-	const int centerY = WIN_SIZE_Y / 2 + offsetY;
+	const int centerY = WIN_SIZE_Y / 2;
 	const int crossSize = 10;
 	int crossColor = GetColor(255, 255, 255);
 

@@ -46,9 +46,11 @@ void CollisionManager::CheckEvent()
 }
 
 void CollisionManager::BroadPhase()
-{
-
+{   
+#ifdef _DEBUG
     DrawFormatString(0, 150, GetColor(255, 255, 255), "colliderSize = %d", colliders.size());
+#endif // _DEBUG
+
     for (size_t i = 0; i < colliders.size(); ++i) {
         for (size_t j = i + 1; j < colliders.size(); ++j) {
             AABB a = colliders[i]->GetAABB();
@@ -120,8 +122,7 @@ void CollisionManager::NarrowPhase()
         // 当たっていればフラグを立てる
         if (isHit)
         {
-            colA->SetIsHitTRUE();
-            colB->SetIsHitTRUE();
+            colA->SetIsHitTRUE();            colB->SetIsHitTRUE();
 
             colA->AddCurrentHitCollider(colB);
             colB->AddCurrentHitCollider(colA);

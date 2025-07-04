@@ -64,7 +64,6 @@ public:
     AABB GetAABB() const { return aabb; }// AABBのゲッター
     ColliderType GetType() const { return type; }// 構造体のTypeを返す
     bool GetIsHit() const { return m_isHit; } // m_isHitのゲッター
-    string GetTag() const { return tag; } // Tagのゲッタ―
 
     const BoxType* GetBox() const { return std::get_if<BoxType>(&data); } // BoxTypeのゲッター
     const SphereType* GetSphere() const { return std::get_if<SphereType>(&data); } // SphereTypeのゲッター
