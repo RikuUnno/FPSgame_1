@@ -17,6 +17,8 @@ public:
 	virtual ~CollisionManager(); // デストラクタ
 
 public:
+	void AddCollider(Collider* c);
+
 	void DeleteCollider(Collider* c);
 
 public:
@@ -25,6 +27,8 @@ public:
 	void NarrowPhase(); // BroadPhaseで作ったペアの詳細な当たり判定
 
 	void HitCheck(); // 総まとめの関数
+
+	void CheckEvent(); // イベントのチェック
 
 private:
 

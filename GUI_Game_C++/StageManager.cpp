@@ -10,16 +10,29 @@ StageManager::~StageManager()
 
 void StageManager::Init(CollisionManager* cm)
 {
-    // 地面
-    stages.emplace_back(VGet(-50, 0, -50), VGet(50, 1, 50), GetColor(100, 100, 255), cm);
+    // 地面（明るめの落ち着いたグレー）
+    stages.emplace_back(
+        VGet(-100, 0, -100), VGet(100, 1, 100),
+        GetColor(110, 110, 110), cm
+    );
 
-    // ブロック
-    stages.emplace_back(VGet(-10, 1, -10), VGet(10, 3, 10), GetColor(180, 100, 100), cm);
-    stages.emplace_back(VGet(15, 1, 5), VGet(25, 4, 15), GetColor(100, 180, 100), cm);
+    // 奥の壁（しっかり明るめの灰色、プレイヤーが見失わない）
+    stages.emplace_back(
+        VGet(-100, 1, 99), VGet(100, 20, 100),
+        GetColor(160, 160, 160), cm
+    );
 
-    // 壁
-    stages.emplace_back(VGet(-50, 0, -50), VGet(-49, 10, 50), GetColor(150, 150, 150), cm);
-    stages.emplace_back(VGet(49, 0, -50), VGet(50, 10, 50), GetColor(150, 150, 150), cm);
+    // 左の壁（中間グレー：真っ黒すぎない、影になじむ）
+    stages.emplace_back(
+        VGet(-100, 1, -100), VGet(-98, 20, 100),
+        GetColor(70, 70, 70), cm
+    );
+
+    // 右の壁（左と同じトーン）
+    stages.emplace_back(
+        VGet(98, 1, -100), VGet(100, 20, 100),
+        GetColor(70, 70, 70), cm
+    );
 }
 
 // 更新

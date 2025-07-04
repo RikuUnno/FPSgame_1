@@ -20,4 +20,6 @@ public:
 
 private:
     void Draw(); // •`‰æ
+
+    void OnCollisionEnter(Collider* other) override;
 };

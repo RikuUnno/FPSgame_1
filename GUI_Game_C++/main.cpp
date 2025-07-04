@@ -50,10 +50,10 @@ void DrawGround()
 			double startX = -size / 2 + x * cell;
 			double startZ = -size / 2 + z * cell;
 
-			VECTOR p1 = VGet((float)startX, 0.0f, (float)startZ);       // 左奥
-			VECTOR p2 = VGet((float)startX + (float)cell, 0.0f, (float)startZ);       // 右奥
-			VECTOR p3 = VGet((float)startX + (float)cell, 0.0f, (float)startZ + (float)cell);  // 右前
-			VECTOR p4 = VGet((float)startX, 0.0f, (float)startZ + (float)cell);  // 左前
+			VECTOR p1 = VGet((float)startX, -1.3f, (float)startZ);       // 左奥
+			VECTOR p2 = VGet((float)startX + (float)cell, -1.3f, (float)startZ);       // 右奥
+			VECTOR p3 = VGet((float)startX + (float)cell, -1.3f, (float)startZ + (float)cell);  // 右前
+			VECTOR p4 = VGet((float)startX, -1.3f, (float)startZ + (float)cell);  // 左前
 
 			int color = ((x + z) % 2 == 0) ? color1 : color2;
 
@@ -123,8 +123,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 	// ESCを押したら画面が落ちる
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
-		clsDx();
+		//clsDx();
 		ClearDrawScreen();
+
+		sm.Update(); // ステージの更新
 
 		DrawGround(); // グラウンドの描画
 
@@ -136,11 +138,9 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 		cam.Update(centerX, centerY); // カメラ(視点)の更新
 
-		DrawCrossHair(); // クロスヘアの描画（最前面）
-
-		sm.Update(); // ステージの更新
-
 		cm.HitCheck(); // 当たり判定
+
+		DrawCrossHair(); // クロスヘアの描画（最前面）
 
 		ScreenFlip();
 	}

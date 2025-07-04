@@ -118,7 +118,7 @@ void Camera::BulletUpdate()
 	}
 
 	std::erase_if(m_bulletList, [](const Bullet& b) {
-		return !b.IsAlive();
+		return !b.IsAlive()/* || b.GetIsHit()*/;
 		});
 
 	for (auto& bullet : m_bulletList)
@@ -132,7 +132,7 @@ void Camera::InputFireKey()
 {
 	if (GetMouseInput() & MOUSE_INPUT_LEFT && m_bulletTimer <= 0)
 	{
-		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front, 1, 2, 300.0, m_manager);
+		m_bulletList.emplace_back(VAdd(m_camPos, VGet(0.0, -2.0, 0.0)), m_front, 1, 0.2, 300.0, m_manager);
 		m_bulletTimer = m_INTERVAL;
 	}
 }

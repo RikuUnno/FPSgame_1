@@ -17,12 +17,8 @@ void Enemy::SetPosition()
 
 void Enemy::SetRandomColor()
 {
-    if (m_isHit == true)
-    {
-
         EnemyColor = GetColor(GetRand(255), GetRand(255), GetRand(255));
         m_isHit = false; // 最後にはfalseに戻す
-    }
 }
 
 // 更新
@@ -30,7 +26,7 @@ void Enemy::Update()
 {
 	SetPosition(); // m_posButtomを変更する際は必ず必用
 
-    SetRandomColor();
+    //SetRandomColor();
 
     SetAABB(); // AABBの更新 
 
@@ -45,4 +41,10 @@ void Enemy::Update()
 void Enemy::Draw() 
 {
     DrawCapsule3D(std::get<CapsuleType>(data).m_posBottom, std::get<CapsuleType>(data).m_posTop, (float)std::get<CapsuleType>(data).m_radius, 8, EnemyColor, EnemyColor, TRUE);
+}
+
+void Enemy::OnCollisionEnter(Collider* other) 
+{
+    printfDx("Enemy:BulletHIt = Enter");
+    SetRandomColor();
 }

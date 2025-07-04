@@ -11,6 +11,15 @@ CollisionManager::CollisionManager()
 CollisionManager::~CollisionManager()
 {}
 
+void CollisionManager::AddCollider(Collider* c)
+{
+#ifdef _DEBUG
+    printfDx("add ");
+#endif // _DEBUG
+
+    colliders.push_back(c);
+}
+
 // 指定したColliderを破棄し、リストから削除する
 void CollisionManager::DeleteCollider(Collider* c)
 {
@@ -24,6 +33,16 @@ void CollisionManager::HitCheck()
 {
     BroadPhase(); //　簡易的な当たり判定
     NarrowPhase(); // 精密な当たり判定
+
+    CheckEvent(); // イベントの発火チェック
+}
+
+void CollisionManager::CheckEvent()
+{
+    for (auto* collider : colliders)
+    {
+        collider->CheckCollisionEvent();
+    }
 }
 
 void CollisionManager::BroadPhase()
@@ -103,6 +122,9 @@ void CollisionManager::NarrowPhase()
         {
             colA->SetIsHitTRUE();
             colB->SetIsHitTRUE();
+
+            colA->AddCurrentHitCollider(colB);
+            colB->AddCurrentHitCollider(colA);
         }
     }
 

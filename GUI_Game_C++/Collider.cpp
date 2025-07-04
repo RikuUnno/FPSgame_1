@@ -10,7 +10,7 @@ Collider::Collider(const std::variant<BoxType, SphereType, CapsuleType>& data, C
 
     m_isHit = false;
     aabb = { VGet(0, 0, 0), VGet(0, 0, 0) };
-    AddCollider(manager);
+    m_manager->AddCollider(this);
 }
 
 Collider::~Collider()
@@ -34,13 +34,9 @@ void Collider::SetIsHitFALSE()
 	m_isHit = false;
 }
 
-void Collider::AddCollider(CollisionManager* manager)
+void Collider::AddCurrentHitCollider(Collider* col)
 {
-#ifdef _DEBUG
-    printfDx("add ");
-#endif // _DEBUG
-
-    manager->GetColliderList().push_back(this);
+    currentHitColliders.push_back(col);
 }
 
 #ifdef _DEBUG
@@ -69,3 +65,29 @@ void Collider::DrawAABB() const
     DrawLine3D(p[2], p[6], color); DrawLine3D(p[3], p[7], color);
 }
 #endif // _DEBUG
+
+void Collider::CheckCollisionEvent()
+{
+    for (Collider* other : currentHitColliders)
+    {
+        if (std::find(previousHitColliders.begin(), previousHitColliders.end(), other) == previousHitColliders.end())
+        {
+            OnCollisionEnter(other); // 初めて当たった
+        }
+        else
+        {
+            OnCollisionStay(other); // 前も今も当たってる
+        }
+    }
+
+    for (Collider* other : previousHitColliders)
+    {
+        if (std::find(currentHitColliders.begin(), currentHitColliders.end(), other) == currentHitColliders.end())
+        {
+            OnCollisionExit(other); // 今回は当たっていない
+        }
+    }
+
+    previousHitColliders = currentHitColliders; // 前の状態を更新
+    currentHitColliders.clear(); // 今の状態は初期化
+}

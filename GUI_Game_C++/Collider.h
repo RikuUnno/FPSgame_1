@@ -1,5 +1,6 @@
 #pragma once
 #include "DxLib.h"
+#include <vector>
 #include <variant>
 
 class CollisionManager; // 前方宣言
@@ -42,6 +43,10 @@ protected:
 
     CollisionManager* m_manager;
 
+protected:
+    std::vector<Collider*>previousHitColliders; //前（処理中のフレーム）の当たったCollider
+    std::vector<Collider*>currentHitColliders;  //現在(処理中のフレーム)の当たったCollider
+
 public:
     // コンストラクタ
     Collider(const std::variant<BoxType, SphereType, CapsuleType>& data, CollisionManager* manager);
@@ -56,16 +61,25 @@ public:
 
     virtual void SetAABB() = 0; // 各コライダーに実装内容を描く
 
-    AABB GetAABB() const { return aabb; } // AABBのゲッター
-    ColliderType GetType() const { return type; } // 構造体のTypeを返す
-    bool GetIsHit() { return m_isHit; }			  // m_isHitのゲッター
+    AABB GetAABB() const { return aabb; }// AABBのゲッター
+    ColliderType GetType() const { return type; }// 構造体のTypeを返す
+    bool GetIsHit() const { return m_isHit; } // m_isHitのゲッター
+    string GetTag() const { return tag; } // Tagのゲッタ―
 
     const BoxType* GetBox() const { return std::get_if<BoxType>(&data); } // BoxTypeのゲッター
     const SphereType* GetSphere() const { return std::get_if<SphereType>(&data); } // SphereTypeのゲッター
     const CapsuleType* GetCapsule() const { return std::get_if<CapsuleType>(&data); } // CapsuleTypeのゲッター
 
-    void AddCollider(CollisionManager* manager); // Coliderの追加
+    void AddCurrentHitCollider(Collider* col);
 
     void DrawAABB() const;
+
+public:
+    void CheckCollisionEvent(); // 衝突判定のイベント発火用
+
+protected:
+    virtual void OnCollisionEnter(Collider* other) {}   // 接触直後
+    virtual void OnCollisionStay(Collider* other) {}    // 接触中
+    virtual void OnCollisionExit(Collider* other) {}    // 接触後
 };
  
