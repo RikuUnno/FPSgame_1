@@ -25,6 +25,10 @@ private:
     int m_timer;             // ゲームプレイ中の残り時間（フレーム数）
     int m_readyTimer;        // Ready状態のカウントダウンタイマー（フレーム数）
     GameState m_gameState; // ゲーム状態の管理
+
+    int m_goDisplayTimer;       // GOの表示時間（フレーム）
+    bool m_showHitText;     // HIT表示フラグ
+    int m_hitTextTimer;         // HIT表示タイマー
     
     int m_gameOverDisplayTimer; // GAME OVER 表示時間
 
