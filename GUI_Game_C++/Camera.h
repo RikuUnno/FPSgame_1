@@ -18,7 +18,7 @@ private:
 	int m_mouseX, m_mouseY; // マウスのポイントを入れるXY
 	int m_dx, m_dy; // 視点の回転
 	const double M_SPEED = 0.2; // 移動するスピート(一フレームごと)
-	const double M_SENSITIVITY = 0.001; // マウスのセンシ（感度）
+	double m_sensitivity = 0.1; // マウスのセンシ（感度）
 	const double M_MAX_ANGLE = DX_PI / 2 - 0.1;
 
 private:
@@ -29,6 +29,12 @@ private:
 private:
 	CollisionManager* m_manager;
 
+private:
+	int m_sliderX = 50;      // スライダー左端のX座標
+	int m_sliderY = 650;     // スライダーのY座標
+	int m_sliderWidth = 200; // スライダーの幅
+	bool m_isDragging = false; // スライダーをドラッグ中かどうか
+
 public:
 	// コンストラクタ
 	Camera(CollisionManager* manager);
@@ -38,6 +44,10 @@ public:
 
 	// アップデートメソッド（基本はこのメソッドを実行関数で実行する）引数は画面の中心地
 	void Update(int centerX, int centerY);
+
+public:
+	void DrawSensitivitySlider(); // 感度スライダーの描画
+	void UpdateSensitivitySlider(); // 感度スライダーの描画
 
 private:
 
