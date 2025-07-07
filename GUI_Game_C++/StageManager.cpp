@@ -10,29 +10,40 @@ StageManager::~StageManager()
 
 void StageManager::Init(CollisionManager* cm)
 {
-    // 地面（明るめの落ち着いたグレー）
-    stages.emplace_back(
-        VGet(-100, 0, -100), VGet(100, 1, 100),
-        GetColor(110, 110, 110), cm
-    );
+    // 地面（全体エリア）
+     stages.emplace_back(VGet(-250, 0, -250), VGet(250, 0, 250), GetColor(110, 110, 110), cm);
 
-    // 奥の壁（しっかり明るめの灰色、プレイヤーが見失わない）
-    stages.emplace_back(
-        VGet(-100, 1, 99), VGet(100, 20, 100),
-        GetColor(160, 160, 160), cm
-    );
+    // --- 中央（設置エリア） ---
+    stages.emplace_back(VGet(-70, 0, 35), VGet(50, 1.5, 140), GetColor(130, 130, 130), cm); // 設置場所
 
-    // 左の壁（中間グレー：真っ黒すぎない、影になじむ）
-    stages.emplace_back(
-        VGet(-100, 1, -100), VGet(-98, 20, 100),
-        GetColor(70, 70, 70), cm
-    );
+    // --- 左側 ---
+    stages.emplace_back(VGet(-70, 40, 22), VGet(-72, 0, 140), GetColor(70, 70, 70), cm);     // 扉の右
+    stages.emplace_back(VGet(-70, 40, 6), VGet(-72, 15, 22), GetColor(70, 70, 70), cm);      // 扉の上
+    stages.emplace_back(VGet(-70, 40, -7), VGet(-72, 0, 6), GetColor(70, 70, 70), cm);      // 扉の左
+    
+    // --- 右側 ---
+    stages.emplace_back(VGet(50, 40, -7), VGet(52, 0, 140), GetColor(70, 70, 70), cm);      // 壁
 
-    // 右の壁（左と同じトーン）
-    stages.emplace_back(
-        VGet(98, 1, -100), VGet(100, 20, 100),
-        GetColor(70, 70, 70), cm
-    );
+    // --- 手前 ---
+    stages.emplace_back(VGet(-72, 40, -12), VGet(-15, 0, -7), GetColor(90, 90, 90), cm);    // エントランスの壁
+    stages.emplace_back(VGet(-15, 40, -12), VGet(15, 22, -7), GetColor(90, 90, 90), cm);    // エントランスの壁
+    stages.emplace_back(VGet(15, 40, -12), VGet(52, 0, -7), GetColor(90, 90, 90), cm);    // エントランスの壁
+
+    // --- 奥 ---
+    stages.emplace_back(VGet(-70, 1.5, 138), VGet(50, 20, 140), GetColor(130, 130, 130), cm);  // 奥側の壁
+    stages.emplace_back(VGet(-70, 1.5, 115), VGet(-30, 20, 138), GetColor(130, 130, 130), cm);  // 奥側の壁
+    stages.emplace_back(VGet(-70, 1.5, 113), VGet(-15, 35, 115), GetColor(130, 130, 130), cm);  // 奥側の壁
+    stages.emplace_back(VGet(20, 1.5, 113), VGet(50, 21, 115), GetColor(130, 130, 130), cm);  // 奥側の壁
+    stages.emplace_back(VGet(30, 21, 113), VGet(50, 35, 115), GetColor(130, 130, 130), cm);  // 奥側の壁
+    stages.emplace_back(VGet(30, 1.5, 115), VGet(50, 20, 138), GetColor(130, 130, 130), cm);  // 奥側の壁
+    stages.emplace_back(VGet(-70, 21, 113), VGet(50, 20, 140), GetColor(130, 130, 130), cm);  // 奥側の床
+
+    // --- コンテナ風の遮蔽（設置場所中央） ---
+    stages.emplace_back(VGet(-10, 1.5, 58), VGet(3, 13.5, 71), GetColor(60, 60, 60), cm);  // 左
+    stages.emplace_back(VGet(3, 1.5, 55), VGet(16, 13.5, 68), GetColor(60, 60, 60), cm);  // 右
+
+    // --- コンテナ風の遮蔽（中央左寄り） ---
+    stages.emplace_back(VGet(-50, 1.5, 45), VGet(-35, 20.0, 90), GetColor(60, 60, 60), cm);
 }
 
 // 更新

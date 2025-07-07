@@ -1,6 +1,7 @@
 #include "GameInfo.h"
 #include "Camera.h"
 #include "Enemy.h"
+#include "EnemyManager.h"
 #include "BoxCollider.h"
 #include "CapsuleCollider.h"
 #include "SphereCollider.h"
@@ -99,10 +100,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 	SetupDefaultLight(); // ライティング設定
 
 	CollisionManager cm; // 当たり判定関係
-
+	 
 	Camera cam(&cm); // カメラ本体
 
-	Enemy enemy(VGet(0.0, 6.0, 0.0), 10.0, 2.0, &cm); // 敵
+	EnemyManager em(&cm); // 敵
 
 	StageManager sm; // ステージの生成
 
@@ -116,11 +117,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	sm.Init(&cm); // ステージの生成
+	em.InitSpawners();
 
 	// ESCを押したら画面が落ちる
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
-		//clsDx();
+		clsDx();
 		ClearDrawScreen();
 
 		sm.Update(); // ステージの更新
@@ -131,7 +133,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		DrawVectorLine(); // XYZのライン描画
 #endif // _DEBUG
 
-		enemy.Update(); // 敵の更新
+		em.Update(); // 敵の更新
 
 		cam.Update(centerX, centerY); // カメラ(視点)の更新
 
@@ -143,4 +145,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 	}
 
 	DxLib_End(); // DXライブラリ使用の終了処理
+
+	return 0;
 }

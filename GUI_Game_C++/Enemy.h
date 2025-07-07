@@ -7,8 +7,17 @@ class Enemy : public CapsuleCollider
 private:
     unsigned int EnemyColor; // 自分の色
 
+    double m_minX; // 横移動の範囲(左)
+    double m_maxX; // 横移動の範囲(右)
+    double m_speed; // 移動速度
+    bool m_movingRight; // 左移動の時用
+
+    bool m_isDead;
+
+
+
 public:
-    Enemy(VECTOR pos, double height, double radius, CollisionManager* manager); // コンストラクタ
+    Enemy(VECTOR pos, double height, double radius, double moveMinX, double moveMaxX, CollisionManager* manager); // コンストラクタ
 
     virtual ~Enemy(); // デストラクタ
 
@@ -18,8 +27,14 @@ public:
 
     void SetRandomColor();
 
-private:
     void Draw(); // 描画
 
+public:
+    bool IsDead() const { return m_isDead; } // 死んでいるか判定
+    void Kill() { m_isDead = true; } // 死ぬときに押す
+
+private:
     void OnCollisionEnter(Collider* other) override;
+
+    void Move(); // 横移動
 };

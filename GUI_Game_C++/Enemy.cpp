@@ -1,9 +1,13 @@
 #include "Enemy.h"
 
-Enemy::Enemy(VECTOR pos, double height, double radius, CollisionManager* manager)
-    : CapsuleCollider(VAdd(pos, VGet(0.0f, (float)height, 0.0f)), pos, height, radius, manager) // top // bottom // radius
+Enemy::Enemy(VECTOR pos, double height, double radius, double moveMinX, double moveMaxX, CollisionManager* manager)
+    : CapsuleCollider(VAdd(pos, VGet(0.0f, (float)height, 0.0f)), pos, height, radius, manager), // top // bottom // radius
+    m_minX(moveMinX), m_maxX(moveMaxX)
 {
     EnemyColor = GetColor(255, 0, 0);
+    m_speed = 0.08;
+    m_movingRight = false;
+    m_isDead = false;
 }
 
 Enemy::~Enemy()
@@ -25,7 +29,7 @@ void Enemy::SetRandomColor()
 // 更新
 void Enemy::Update() 
 {
-	SetPosition(); // m_posButtomを変更する際は必ず必用
+    Move(); // 横移動
 
     //SetRandomColor();
 
@@ -44,7 +48,28 @@ void Enemy::Draw()
     DrawCapsule3D(std::get<CapsuleType>(data).m_posBottom, std::get<CapsuleType>(data).m_posTop, (float)std::get<CapsuleType>(data).m_radius, 8, EnemyColor, EnemyColor, TRUE);
 }
 
+void Enemy::Move()
+{
+    VECTOR& bottom = std::get<CapsuleType>(data).m_posBottom;
+
+    if (m_movingRight)
+    {
+        bottom.x += (float)m_speed;
+        if (bottom.x >= m_maxX) m_movingRight = false;
+    }
+    else
+    {
+        bottom.x -= (float)m_speed;
+        if (bottom.x <= m_minX) m_movingRight = true;
+    }
+
+    SetPosition(); // top位置を更新
+}
+
 void Enemy::OnCollisionEnter(Collider* other) 
 {
-    SetRandomColor();
+    // プレイヤーの弾と衝突
+    if (other->GetType() == ColliderType::Sphere) {
+    Kill();
+    }
 }

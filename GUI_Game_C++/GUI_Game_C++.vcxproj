@@ -26,6 +26,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="GameInfo.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Stage.h" />

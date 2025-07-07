@@ -10,9 +10,7 @@ Stage::~Stage()
 Stage::Stage(const Stage& ohter)
     :BoxCollider(ohter.GetBox()->min, ohter.GetBox()->max, ohter.m_manager), 
     m_color(ohter.m_color)
-{
-
-}
+{}
 
 void Stage::Update()
 {
@@ -56,7 +54,6 @@ void Stage::DrawStage() const
     DrawTriangle3D(p[3], p[0], p[4], m_color, TRUE);
     DrawTriangle3D(p[3], p[4], p[7], m_color, TRUE);
 
-#ifdef _DEBUG
-    DrawAABB(); // AABB表示（デバッグ）
-#endif
+    DrawAABB(); // みやすくするため
+
 }

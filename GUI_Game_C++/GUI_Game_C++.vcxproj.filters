@@ -97,6 +97,18 @@
     <Filter Include="ソース ファイル\Stage\Manager">
       <UniqueIdentifier>{d67b6a13-8a52-41b2-9fc5-9b7cd762b80c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy\manager">
+      <UniqueIdentifier>{9e3d6c52-c4d5-469d-bdbc-159e2b909585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Enemy\enemy">
+      <UniqueIdentifier>{78ff6d84-f998-40a5-942a-66a30410c083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Enemy\manager">
+      <UniqueIdentifier>{5d0708a2-c4ef-489e-b0c8-e10d5a703133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Enemy\enemy">
+      <UniqueIdentifier>{2b75018b-a310-4fea-83af-21244200024f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -123,14 +135,17 @@
     <ClInclude Include="Camera.h">
       <Filter>ヘッダー ファイル\Player\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>ヘッダー ファイル\Stage\Stage</Filter>
     </ClInclude>
     <ClInclude Include="StageManager.h">
       <Filter>ヘッダー ファイル\Stage\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル\Enemy\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>ヘッダー ファイル\Enemy\manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,14 +173,17 @@
     <ClCompile Include="Camera.cpp">
       <Filter>ソース ファイル\Player\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>ソース ファイル\Stage\Stage</Filter>
     </ClCompile>
     <ClCompile Include="StageManager.cpp">
       <Filter>ソース ファイル\Stage\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\Enemy\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>ソース ファイル\Enemy\manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

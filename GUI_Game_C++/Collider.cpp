@@ -39,7 +39,7 @@ void Collider::AddCurrentHitCollider(Collider* col)
     currentHitColliders.push_back(col);
 }
 
-#ifdef _DEBUG
+
 // デバック用のAABBを線で表示
 void Collider::DrawAABB() const
 {
@@ -64,7 +64,6 @@ void Collider::DrawAABB() const
     DrawLine3D(p[0], p[4], color); DrawLine3D(p[1], p[5], color);
     DrawLine3D(p[2], p[6], color); DrawLine3D(p[3], p[7], color);
 }
-#endif // _DEBUG
 
 void Collider::CheckCollisionEvent()
 {
