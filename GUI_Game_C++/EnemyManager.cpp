@@ -1,4 +1,5 @@
 #include "EnemyManager.h"
+#include "GameManager.h"
 #include <algorithm>
 
 EnemyManager::EnemyManager(CollisionManager* cm)
@@ -40,6 +41,7 @@ void EnemyManager::Update()
     if (IsEnemyDead())
     {
         SpawnEnemy(); // 新しくスポーン
+        GameManager::GetInstance().OnEnemyKilled();  // +100点の加点処理
     }
 
     for (auto& enemy : enemys)

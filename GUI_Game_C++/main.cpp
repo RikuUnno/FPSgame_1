@@ -108,7 +108,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	StageManager sm; // ステージの生成
 
-	GameManager gm(&cam); // ゲーム全体の管理
+	GameManager::GetInstance(&cam);
 
 	const int centerX = WIN_SIZE_X / 2; // マウスの固定する場所
 	const int centerY = WIN_SIZE_Y / 2; // マウスの固定する場所
@@ -144,7 +144,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 		DrawCrossHair(); // クロスヘアの描画（最前面）
 
-		gm.Update();
+		GameManager::GetInstance().Update();
 
 		ScreenFlip();
 	}

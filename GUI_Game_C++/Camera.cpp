@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "GameManager.h"
 #include <algorithm>
 
 Camera::Camera(CollisionManager* manager)
@@ -160,5 +161,6 @@ void Camera::InputFireKey()
 		VECTOR spawnPos = VAdd(m_camPos, VScale(m_front, 2.0f)); // 正面にオフセット
 		m_bulletList.emplace_back(spawnPos, m_front, 0.5, 5, 120.0, m_manager);
 		m_bulletTimer = m_INTERVAL;
+		GameManager::GetInstance().OnFire();  // -2点の減点処理
 	}
 }
