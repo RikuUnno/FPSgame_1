@@ -40,6 +40,10 @@ public:
 	void Update(int centerX, int centerY);
 
 private:
+
+	// プレイヤーの移動範囲
+	void ClampPositionInsideCircle(const VECTOR& center, double radius);
+
 	//　キーボードの入力処理
 	void InputKey();
 

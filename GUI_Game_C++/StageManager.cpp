@@ -17,17 +17,10 @@ void StageManager::Init(CollisionManager* cm)
     stages.emplace_back(VGet(-70, 0, 35), VGet(50, 1.5, 140), GetColor(130, 130, 130), cm); // 設置場所
 
     // --- 左側 ---
-    stages.emplace_back(VGet(-70, 40, 22), VGet(-72, 0, 140), GetColor(70, 70, 70), cm);     // 扉の右
-    stages.emplace_back(VGet(-70, 40, 6), VGet(-72, 15, 22), GetColor(70, 70, 70), cm);      // 扉の上
-    stages.emplace_back(VGet(-70, 40, -7), VGet(-72, 0, 6), GetColor(70, 70, 70), cm);      // 扉の左
+    stages.emplace_back(VGet(-70, 40, -7), VGet(-72, 0, 140), GetColor(70, 70, 70), cm);     // 扉
     
     // --- 右側 ---
     stages.emplace_back(VGet(50, 40, -7), VGet(52, 0, 140), GetColor(70, 70, 70), cm);      // 壁
-
-    // --- 手前 ---
-    stages.emplace_back(VGet(-72, 40, -12), VGet(-15, 0, -7), GetColor(90, 90, 90), cm);    // エントランスの壁
-    stages.emplace_back(VGet(-15, 40, -12), VGet(15, 22, -7), GetColor(90, 90, 90), cm);    // エントランスの壁
-    stages.emplace_back(VGet(15, 40, -12), VGet(52, 0, -7), GetColor(90, 90, 90), cm);    // エントランスの壁
 
     // --- 奥 ---
     stages.emplace_back(VGet(-70, 1.5, 138), VGet(50, 20, 140), GetColor(130, 130, 130), cm);  // 奥側の壁

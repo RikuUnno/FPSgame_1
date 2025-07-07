@@ -38,6 +38,8 @@ void Camera::Update(int centerX, int centerY)
 	InputMouse(); // マウスの入力
 	InputKey(); //	キーの入力
 
+	ClampPositionInsideCircle(VGet(0, 0, 0), 15.0); // 移動範囲の制限
+
 	// 視点の回転（マウスの移動量で角度の変更）
 	m_dx = m_mouseX - centerX;
 	m_dy = m_mouseY - centerY;
@@ -64,10 +66,28 @@ void Camera::Update(int centerX, int centerY)
 
 }
 
+// プレイヤーの移動範囲
+void Camera::ClampPositionInsideCircle(const VECTOR& center, double radius)
+{
+	// XZ平面のカメラ位置ベクトル（Yは無視）
+	double dx = m_camPos.x - center.x;
+	double dz = m_camPos.z - center.z;
+
+	double distSq = dx * dx + dz * dz;
+
+	if (distSq > radius * radius)
+	{
+		double dist = sqrt(distSq);
+		double clampedX = center.x + dx / dist * radius;
+		double clampedZ = center.z + dz / dist * radius;
+
+		// Y座標はそのまま維持
+		m_camPos.x = (float)clampedX;
+		m_camPos.z = (float)clampedZ;
+	}
+}
 
 //　キーボードの入力処理
-//　キーボードの入力処理
-
 inline void Camera::InputKey()
 {
 	// 前後左右の方向ベクトル計算
