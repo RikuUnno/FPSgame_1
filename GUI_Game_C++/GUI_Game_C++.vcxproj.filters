@@ -109,6 +109,15 @@
     <Filter Include="ヘッダー ファイル\Enemy\enemy">
       <UniqueIdentifier>{2b75018b-a310-4fea-83af-21244200024f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\main\manager">
+      <UniqueIdentifier>{24060d03-67a4-4af9-a24f-a635300625da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\main">
+      <UniqueIdentifier>{6e7886f0-7380-44cf-8cbe-8fe960196823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\main\manager">
+      <UniqueIdentifier>{18453d19-0471-4cfb-8f9b-d9f742eaa6d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -147,6 +156,9 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>ヘッダー ファイル\Enemy\manager</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>ヘッダー ファイル\main\manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -184,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>ソース ファイル\Enemy\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>ソース ファイル\main\manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 #include "GameInfo.h"
+#include "GameManager.h"
 #include "Camera.h"
 #include "Enemy.h"
 #include "EnemyManager.h"
@@ -107,6 +108,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	StageManager sm; // ステージの生成
 
+	GameManager gm(&cam); // ゲーム全体の管理
+
 	const int centerX = WIN_SIZE_X / 2; // マウスの固定する場所
 	const int centerY = WIN_SIZE_Y / 2; // マウスの固定する場所
 
@@ -140,6 +143,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		cm.HitCheck(); // 当たり判定
 
 		DrawCrossHair(); // クロスヘアの描画（最前面）
+
+		gm.Update();
 
 		ScreenFlip();
 	}

@@ -17,7 +17,7 @@ public:
 	// コンストラクタ
 	Bullet(VECTOR pos, VECTOR dir, double radius, double speed, double life, CollisionManager* manager);
 
-	Bullet(const Bullet& ohter);
+	Bullet(const Bullet& other);
 
 	// デストラクタ
 	virtual ~Bullet();

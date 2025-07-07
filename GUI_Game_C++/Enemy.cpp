@@ -4,10 +4,20 @@ Enemy::Enemy(VECTOR pos, double height, double radius, double moveMinX, double m
     : CapsuleCollider(VAdd(pos, VGet(0.0f, (float)height, 0.0f)), pos, height, radius, manager), // top // bottom // radius
     m_minX(moveMinX), m_maxX(moveMaxX)
 {
-    EnemyColor = GetColor(255, 0, 0);
+    m_enemyColor = GetColor(255, 0, 0);
     m_speed = 0.08;
     m_movingRight = false;
     m_isDead = false;
+}
+
+Enemy::Enemy(const Enemy& other)
+    :CapsuleCollider(other.GetCapsule()->m_posTop, other.GetCapsule()->m_posBottom, other.GetCapsule()->m_height, other.GetCapsule()->m_radius, other.m_manager),
+    m_minX(other.m_minX), m_maxX(other.m_maxX)
+{
+    m_enemyColor = other.m_enemyColor;
+    m_speed = other.m_speed;
+    m_movingRight = other.m_movingRight;
+    m_isDead = other.m_isDead;
 }
 
 Enemy::~Enemy()
@@ -22,7 +32,7 @@ void Enemy::SetPosition()
 // êFÇÃïœçX
 void Enemy::SetRandomColor()
 {
-        EnemyColor = GetColor(GetRand(255), GetRand(255), GetRand(255));
+        m_enemyColor = GetColor(GetRand(255), GetRand(255), GetRand(255));
         m_isHit = false; // ç≈å„Ç…ÇÕfalseÇ…ñﬂÇ∑
 }
 
@@ -45,7 +55,7 @@ void Enemy::Update()
 // ï`âÊ
 void Enemy::Draw() 
 {
-    DrawCapsule3D(std::get<CapsuleType>(data).m_posBottom, std::get<CapsuleType>(data).m_posTop, (float)std::get<CapsuleType>(data).m_radius, 8, EnemyColor, EnemyColor, TRUE);
+    DrawCapsule3D(std::get<CapsuleType>(data).m_posBottom, std::get<CapsuleType>(data).m_posTop, (float)std::get<CapsuleType>(data).m_radius, 8, m_enemyColor, m_enemyColor, TRUE);
 }
 
 void Enemy::Move()

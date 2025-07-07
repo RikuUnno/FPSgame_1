@@ -5,7 +5,7 @@
 class Enemy : public CapsuleCollider 
 {
 private:
-    unsigned int EnemyColor; // 自分の色
+    unsigned int m_enemyColor; // 自分の色
 
     double m_minX; // 横移動の範囲(左)
     double m_maxX; // 横移動の範囲(右)
@@ -18,6 +18,8 @@ private:
 
 public:
     Enemy(VECTOR pos, double height, double radius, double moveMinX, double moveMaxX, CollisionManager* manager); // コンストラクタ
+
+    Enemy(const Enemy& other);
 
     virtual ~Enemy(); // デストラクタ
 
